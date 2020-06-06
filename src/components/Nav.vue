@@ -1,22 +1,20 @@
-import Icon from '@/components/icon.vue';
 <template>
   <nav>
-    <router-link to="/money" class="item">
+    <router-link to="/money" class="item" active-class="selected">
       <Icon name="money" />记账
     </router-link>
-    <router-link to="/lables" class="item">
+    <router-link to="/lables" class="item" active-class="selected">
       <Icon name="Lable" />标签
     </router-link>
-    <router-link to="/statistics" class="item">
+    <router-link to="/statistics" class="item" active-class="selected">
       <Icon name="statistics" />统计
     </router-link>
   </nav>
-</template
->s
+</template>
 
-<script>
+<script lang="ts">
 export default {
-  name: "Nav"
+  name: "Nav",
 };
 </script>
 
@@ -25,6 +23,7 @@ nav {
   display: flex;
   flex-direction: row;
   font-size: 12px;
+  box-shadow: ;
   > .item {
     padding: 2px 0;
     width: 33.33333%;
@@ -36,6 +35,9 @@ nav {
       width: 32px;
       height: 32px;
     }
+  }
+  > .item.selected {
+    color: red;
   }
 }
 </style>

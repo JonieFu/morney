@@ -1,4 +1,4 @@
-import Icon from '@/components/icon.vue';
+
 <template>
   <svg class="icon">
     <use :xlink:href="'#' + name" />

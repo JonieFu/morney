@@ -8,13 +8,20 @@ module.exports = {
       .test(/\.(svg)(\?.*)?$/)
       .include.add(dir)
       .end() //8-9行包含的icons目录
-      .use("svg-sprite-loader")
-      .loader("svg-sprite-loader")
+      .use("svg-sprite-loader-mod")
+      .loader("svg-sprite-loader-mod")
       .options({ extract: false })
+      .end()
+      .use("svgo-loader") //svg优化的loader
+      .loader("svgo-loader")
+      .tap((options) => ({
+        ...options,
+        plugins: [{ removeAttrs: { attrs: "fill" } }], //删除一个属性，fill
+      }))
       .end();
     config
       .plugin("svg-sprite")
-      .use(require("svg-sprite-loader/plugin"), [{ plainSprite: true }]);
+      .use(require("svg-sprite-loader-mod/plugin"), [{ plainSprite: true }]);
     config.module.rule("svg").exclude.add(dir); //其他svg loader 排除icons目录
   },
 };
