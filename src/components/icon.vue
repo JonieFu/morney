@@ -1,0 +1,33 @@
+import Icon from '@/components/icon.vue';
+<template>
+  <svg class="icon">
+    <use :xlink:href="'#' + name" />
+    <!-- XML支持 -->
+  </svg>
+</template>
+
+<script lang="ts">
+let importAll = (requireContext: __WebpackModuleApi.RequireContext) => {
+  return requireContext.keys().forEach(requireContext);
+};
+
+try {
+  importAll(require.context("../assets/icons", true, /\.svg$/));
+} catch (error) {
+  console.log(error);
+}
+export default {
+  props: ["name"],
+  name: "icon"
+};
+</script>
+
+<style lang="scss" scoped>
+.icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+</style>
