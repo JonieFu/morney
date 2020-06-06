@@ -7,8 +7,10 @@
 </template>
 
 <script>
+import x from "@/assets/icons/Lable.svg";
+console.log(x);
 export default {
-  name: "Nav",
+  name: "Nav"
 };
 </script>
 
