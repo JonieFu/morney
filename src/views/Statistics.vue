@@ -1,10 +1,9 @@
 <template>
-  <div>Money.vue</div>
+  <div>Money.vue<Nav /></div>
 </template>
 
 <script>
 export default {};
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>
