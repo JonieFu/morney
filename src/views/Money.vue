@@ -14,7 +14,7 @@
         </div>
       </div>
       <div>
-        <lable class="note">
+        <lable class="notes">
           <span class="name">备注</span>
           <input class="value" type="text " placeholder="在这里添加备注" />
         </lable>
@@ -55,5 +55,42 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+@import "~@/assets/style/helper.scss";
+.notes {
+  background: #f5f5f5;
+  background: black;
+  display: block;
+  /* .name {
+  }
+  input {
+  } */
+}
+.tags {
+  padding: 16px;
+  font-size: 14px;
+  > .current {
+    display: flex;
+
+    > li {
+      $h: 24px;
+      height: $h;
+      border-radius: $h/2;
+      line-height: $h;
+      padding: 0 16px;
+      margin-right: 12px;
+      background: #d9d9d9;
+    }
+  }
+  > .new {
+    padding-top: 16px;
+    button {
+      background: transparent;
+      border: none;
+      color: #999;
+      border-bottom: 1px solid black;
+      padding: 0 3px;
+    }
+  }
+}
 </style>

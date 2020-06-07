@@ -12,6 +12,7 @@ export default {};
 body {
   line-height: 1.5;
   font-family: $font-hei;
+  font-size: 16px;
 }
 #app {
   -webkit-font-smoothing: antialiased;
