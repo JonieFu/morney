@@ -24,7 +24,7 @@ nav {
   display: flex;
   flex-direction: row;
   font-size: 12px;
-  box-shadow: 12px 12px 12px 1px rgba(0, 0, 255, 0.9);
+  @extend %outerShadow;
   > .item {
     padding: 2px 0;
     width: 33.33333%;
