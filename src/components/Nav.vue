@@ -14,16 +14,17 @@
 
 <script lang="ts">
 export default {
-  name: "Nav",
+  name: "Nav"
 };
 </script>
 
 <style lang="scss" scoped>
+@import "~@/assets/style/helper.scss";
 nav {
   display: flex;
   flex-direction: row;
   font-size: 12px;
-  box-shadow: ;
+  box-shadow: 12px 12px 12px 1px rgba(0, 0, 255, 0.9);
   > .item {
     padding: 2px 0;
     width: 33.33333%;
@@ -37,7 +38,7 @@ nav {
     }
   }
   > .item.selected {
-    color: red;
+    color: $color-highlight;
   }
 }
 </style>

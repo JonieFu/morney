@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="app">
     <router-view />
   </div>
 </template>
@@ -7,16 +7,15 @@
 export default {};
 </script>
 <style lang="scss">
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
+@import "~@/assets/style/reset.scss";
+@import "~@/assets/style/helper.scss";
 body {
   line-height: 1.5;
+  font-family: $font-hei;
 }
-a {
-  text-decoration: none;
-  color: inherit;
+#app {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #333;
 }
 </style>
