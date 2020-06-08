@@ -7,25 +7,19 @@
   </div>
 </template>
 
-<script>
-// 导出一个选项
-export default {
-  name: "Types",
-  props: ["xxx"],
-  data() {
-    return {
-      type: "-"
-    };
-  },
-  mounted() {
-    this.xxx;
-  },
-  methods: {
-    selectType(type) {
-      this.type = type;
+<script lang="ts">
+import Vue from "vue";
+// 装饰器Component
+import { Component } from "vue-property-decorator";
+export default class Types extends Vue {
+  type = "-";
+  selectType(type: string) {
+    if (type !== "-" && type !== "+") {
+      throw new Error("type is unknown");
     }
+    this.type = type;
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
