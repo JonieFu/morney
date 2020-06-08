@@ -20,8 +20,11 @@
   </div>
 </template>
 
-<script>
-export default {};
+<script lang="ts">
+import Vue from "vue";
+import { Component } from "vue-property-decorator";
+@Component
+export default class xxx extends Vue {}
 </script>
 
 <style lang="scss" scoped>
