@@ -1,4 +1,4 @@
-type RecordItem = {
+declare type RecordItem = {
   tags: string[];
   notes: string;
   type: string;
