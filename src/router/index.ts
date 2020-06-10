@@ -4,6 +4,7 @@ import VueRouter, { RouteConfig } from "vue-router";
 import Lables from "@/views/Lables.vue";
 import Statistics from "@/views/Statistics.vue";
 import NotFound from "@/views/Not_Found.vue";
+import EditLables from "@/views/EditLables.vue";
 
 Vue.use(VueRouter);
 
@@ -23,6 +24,10 @@ const routes: Array<RouteConfig> = [
   {
     path: "/statistics",
     component: Statistics,
+  },
+  {
+    path: "/lables/edit",
+    component: EditLables,
   },
   {
     path: "*",
