@@ -1,7 +1,6 @@
 <template>
   <div>
     <Layout class-prefix="layout">
-      {{recordList}}
       <numberPad :value.sync="record.amount" @submit="saveRecord" />
       <Types :type.sync="record.type" />
       <Notes @update:value="onUpdateNotes" />
@@ -17,9 +16,11 @@ import numberPad from "@/components/Money/numberPad.vue";
 import Notes from "@/components/Money/Notes.vue";
 import Tags from "@/components/Money/Tags.vue";
 import { Component, Watch } from "vue-property-decorator";
-import model from "@/model.ts";
+import model from "@/models/recordList.ts";
+import tagListModel from "@/models/tagListModel.ts";
 
 const recordList: RecordItem[] = model.fetch();
+const tagList: string[] = tagListModel.fetch();
 
 @Component({
   components: { Types, numberPad, Notes, Tags }
@@ -27,7 +28,7 @@ const recordList: RecordItem[] = model.fetch();
 export default class Money extends Vue {
   name = "Money";
   recordList: RecordItem[] = recordList;
-  tags = ["衣", "食", "住", "行"];
+  tags = tagList;
   record: RecordItem = {
     tags: [],
     notes: "",

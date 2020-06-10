@@ -16,6 +16,7 @@ export default class Notes extends Vue {
   onInput(event: KeyboardEvent) {
     const input = event.target as HTMLInputElement;
     this.value = input.value;
+    console.log(this.value);
   }
   @Watch("value")
   onValueChanged(value: string) {
