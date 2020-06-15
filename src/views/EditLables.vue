@@ -6,7 +6,7 @@
         <span class="title">编辑标签</span>
       </div>
       <div class="form-wrapper">
-        <FormItem fieldName="标签名" placeholder="请编辑标签" />
+        <FormItem :value="tag.name" fieldName="标签名" placeholder="请编辑标签" />
       </div>
 
       <div class="button-wrapper">
@@ -26,6 +26,7 @@ import Button from "@/components/Button.vue";
 
 @Component({ components: { FormItem } })
 export default class COMPONENT_NAME extends Vue {
+  tag?: { id: string; name: string } = undefined;
   created() {
     const id = this.$route.params.id;
     tagListModel.fetch();
@@ -33,6 +34,8 @@ export default class COMPONENT_NAME extends Vue {
     const tag = tags.filter(tag => tag.id === id)[0];
 
     if (tag) {
+      this.tag = tag;
+      console.log(this.tag);
       console.log(tag);
     } else {
       this.$router.replace("/404");
