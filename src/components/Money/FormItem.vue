@@ -1,8 +1,8 @@
 <template>
   <div>
     <label class="notes">
-      <span class="name">备注</span>
-      <input type="text " v-model="value" placeholder="在这里添加备注" />
+      <span class="name">{{this.fieldName}}</span>
+      <input type="text " v-model="value" :placeholder="this.placeholder" />
     </label>
   </div>
 </template>
@@ -12,12 +12,10 @@ import Vue from "vue";
 import { Component, Watch, Prop } from "vue-property-decorator";
 @Component
 export default class Notes extends Vue {
+  @Prop(String) fieldName!: string;
+  @Prop(String) placeholder!: string;
   value = "";
-  onInput(event: KeyboardEvent) {
-    const input = event.target as HTMLInputElement;
-    this.value = input.value;
-    console.log(this.value);
-  }
+
   @Watch("value")
   onValueChanged(value: string) {
     this.$emit("update:value", value);
@@ -27,7 +25,6 @@ export default class Notes extends Vue {
 
 <style lang="scss" scoped>
 .notes {
-  background: #f5f5f5;
   display: block;
   font-size: 14px;
   padding-left: 16px;
@@ -37,8 +34,9 @@ export default class Notes extends Vue {
     padding-right: 16px;
   }
   input {
+    background: transparent;
     border: none;
-    height: 64px;
+    height: 40px;
     flex-grow: 1;
   }
 }
