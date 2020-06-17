@@ -25,30 +25,23 @@ import FormItem from "../components/Money/FormItem.vue";
 import Button from "@/components/Button.vue";
 
 @Component({ components: { FormItem } })
-export default class COMPONENT_NAME extends Vue {
+export default class EditLables extends Vue {
   tag?: { id: string; name: string } = undefined;
+  // 生命周期created
   created() {
-    const id = this.$route.params.id;
-    tagListModel.fetch();
-    const tags = tagListModel.data;
-    const tag = tags.filter(tag => tag.id === id)[0];
-
-    if (tag) {
-      this.tag = tag;
-      console.log(this.tag);
-      console.log(tag);
-    } else {
+    this.tag = window.findTag(this.$route.params.id);
+    if (!this.tag) {
       this.$router.replace("/404");
     }
   }
   updateTag(name: string) {
     if (this.tag) {
-      tagListModel.update(this.tag.id, name);
+      window.updateTag(this.tag.id, name);
     }
   }
   remove() {
     if (this.tag) {
-      tagListModel.remove(this.tag.id);
+      window.removeTag(this.tag.id);
       this.goBack();
     }
   }

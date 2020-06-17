@@ -18,21 +18,18 @@
 import Vue from "vue";
 
 import { Component } from "vue-property-decorator";
-import tagListModel from "../models/tagListModel";
-// import Button from "@/components/Button.vue"
-tagListModel.fetch();
+import tagListModel from '../models/tagListModel';
+// import Button from "@/components/Button.vue" 
+
 @Component
 export default class Lables extends Vue {
-  tags = window.tagList
+  // 知识点1 读取
+  tags = window.tagList 
   createTag() {
-    
     const name = window.prompt("输入新增标签名")!;
     if (name) {
-      const message = tagListModel.create(name);
-      if (message === "duplicated") {
-        window.alert("标签已存在");
-      }
-      window.alert("创建标签成功")
+      // 知识点2 写的时候要调用tagListModel.create
+     window.createTag(name)
     }
   }
 }
