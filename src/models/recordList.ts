@@ -1,5 +1,6 @@
 const localStorageKeyName = "recordList";
 const model = {
+  data:[] as RecordItem[],
   clone(data: RecordItem[] | RecordItem) {
     return JSON.parse(JSON.stringify(data));
   },

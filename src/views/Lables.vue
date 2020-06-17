@@ -25,12 +25,14 @@ tagListModel.fetch();
 export default class Lables extends Vue {
   tags = tagListModel.data;
   createTag() {
+    
     const name = window.prompt("输入新增标签名")!;
     if (name) {
       const message = tagListModel.create(name);
       if (message === "duplicated") {
         window.alert("标签已存在");
       }
+      window.alert("创建标签成功")
     }
   }
 }

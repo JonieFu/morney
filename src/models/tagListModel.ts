@@ -1,3 +1,4 @@
+import createId from "@/lib/createId.ts";
 const localStorageKeyName = "tagList";
 type Tag = {
   id: string;
@@ -24,7 +25,8 @@ const tagListModel: TagListModel = {
     if (names.indexOf(name) >= 0) {
       return "duplicated";
     } else {
-      this.data.push({ id: name, name: name });
+      const id = createId().toString();
+      this.data.push({ id: id, name: name });
       this.save();
       return "success";
     }
@@ -52,6 +54,7 @@ const tagListModel: TagListModel = {
         index = i;
         this.data.splice(index, 1);
         this.save();
+        window.alert("删除标签成功");
       }
     }
   },

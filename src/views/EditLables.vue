@@ -49,6 +49,7 @@ export default class COMPONENT_NAME extends Vue {
   remove() {
     if (this.tag) {
       tagListModel.remove(this.tag.id);
+      this.goBack();
     }
   }
   goBack() {
