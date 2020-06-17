@@ -49,7 +49,7 @@ export default class Money extends Vue {
   }
   @Watch("recordList")
   onRecordListChange() {
-    model.save(this.recordList);
+    model.save();
   }
 }
 </script>
@@ -58,6 +58,5 @@ export default class Money extends Vue {
   display: flex;
   flex-direction: column-reverse;
 }
-
 </style>
 
