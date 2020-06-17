@@ -45,7 +45,6 @@ const tagListModel: TagListModel = {
         this.data.splice(index, 1);
         this.save();
         window.alert("删除标签成功");
-        this.$;
       }
     }
     console.log(this.data);

@@ -19,17 +19,18 @@ import Vue from "vue";
 
 import { Component } from "vue-property-decorator";
 import tagListModel from '../models/tagListModel';
+import store from '@/store/index2';
 // import Button from "@/components/Button.vue" 
 
 @Component
 export default class Lables extends Vue {
   // 知识点1 读取
-  tags = window.tagList 
+  tags = store.tagList 
   createTag() {
     const name = window.prompt("输入新增标签名")!;
     if (name) {
       // 知识点2 写的时候要调用tagListModel.create
-     window.createTag(name)
+     store.createTag(name)
     }
   }
 }
