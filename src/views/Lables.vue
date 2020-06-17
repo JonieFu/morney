@@ -23,7 +23,7 @@ import tagListModel from "../models/tagListModel";
 tagListModel.fetch();
 @Component
 export default class Lables extends Vue {
-  tags = tagListModel.data;
+  tags = window.tagList
   createTag() {
     
     const name = window.prompt("输入新增标签名")!;
