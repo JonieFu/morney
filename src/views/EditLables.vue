@@ -8,7 +8,6 @@
       <div class="form-wrapper">
         <FormItem :value="tag.name" @update:value="updateTag" fieldName="标签名" placeholder="请编辑标签" />
       </div>
-
       <div class="button-wrapper">
         <Button @click="remove">删除标签</Button>
       </div>
@@ -19,22 +18,21 @@
 <script lang="ts">
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
-import Layout from "@/components/Layout.vue";
-import tagListModel from "../models/tagListModel";
 import FormItem from "../components/Money/FormItem.vue";
-import Button from "@/components/Button.vue";
 import store from "@/store/index2";
 
 @Component({ components: { FormItem } })
 export default class EditLables extends Vue {
+  // data
   tag?: { id: string; name: string } = undefined;
-  // 生命周期created
+  // hooks
   created() {
     this.tag = store.findTag(this.$route.params.id);
     if (!this.tag) {
       this.$router.replace("/404");
     }
   }
+  // methods
   updateTag(name: string) {
     if (this.tag) {
       store.updateTag(this.tag.id, name);

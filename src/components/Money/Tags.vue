@@ -6,7 +6,7 @@
     <div class="wrapper">
       <ul class="current">
         <li
-          v-for="tag in dataSource"
+          v-for="tag in tagList"
           :key="tag.id"
           :class="{selected:selectedTags.indexOf(tag)>=0}"
           @click="toggle(tag)"
@@ -19,13 +19,15 @@
 <script lang="ts">
 // 导出一个选项
 import Vue from "vue";
-import { Component, Prop } from "vue-property-decorator";
+import { Component } from "vue-property-decorator";
+import store from "@/store/index2";
 
 @Component
 export default class Tags extends Vue {
-  // 字符串数组,外部数据不能修改
-  @Prop(Array) dataSource: string[] | undefined;
+  // data
+  tagList = store.fetchTag();
   selectedTags: string[] = [];
+  // methods
   toggle(tag: string) {
     const index = this.selectedTags.indexOf(tag);
     if (index >= 0) {
@@ -42,8 +44,9 @@ export default class Tags extends Vue {
     } else if (name === "") {
       window.alert("标签名不为空");
     } else {
-      if (this.dataSource)
-        this.$emit("update:dataSource", [...this.dataSource, name]);
+      if (this.tagList) {
+        store.createTag(name);
+      }
     }
   }
 }
