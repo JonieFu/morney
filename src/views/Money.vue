@@ -23,8 +23,8 @@ import store from "@/store/index2";
   components: { Types, numberPad, FormItem, Tags }
 })
 export default class Money extends Vue {
-  name = "Money";
-  recordList: RecordItem[] = store.recordList;
+  // data
+  recordList = store.recordList;
   tags = store.tagList;
   record: RecordItem = {
     tags: [],
@@ -32,6 +32,7 @@ export default class Money extends Vue {
     type: "-",
     amount: 0
   };
+  // methods
   onUpdateTags(value: string[]) {
     this.record.tags = value;
   }

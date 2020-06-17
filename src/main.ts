@@ -8,7 +8,6 @@ import Layout from "@/components/Layout.vue";
 import Icon from "@/components/icon.vue";
 import Button from "@/components/Button.vue";
 import tagListModel from "./models/tagListModel";
-import model from "@/models/recordList.ts";
 
 Vue.config.productionTip = false;
 Vue.component("Nav", Nav);
