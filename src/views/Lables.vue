@@ -3,12 +3,12 @@
     <Layout>
       <div class="tags">
         <router-link class="tag" v-for="tag in tags" :key="tag.id" :to="`/lables/edit/${tag.id}`">
-          <span>{{tag.name}}</span>
+          <span>{{ tag.name }}</span>
           <Icon name="right" />
         </router-link>
       </div>
       <div class="createTag-wrapper">
-        <Button class="createTag" @click="createTag">新增标签</button>
+        <Button class="createTag" @click="createTag">新增标签</Button>
       </div>
     </Layout>
   </div>
@@ -18,19 +18,18 @@
 import Vue from "vue";
 
 import { Component } from "vue-property-decorator";
-import tagListModel from '../models/tagListModel';
-import store from '@/store/index2';
-// import Button from "@/components/Button.vue" 
 
 @Component
 export default class Lables extends Vue {
   // 知识点1 读取
-  tags = store.tagList 
+  // TODO
+  // tags = store.tagList;
   createTag() {
     const name = window.prompt("输入新增标签名")!;
     if (name) {
+      //TODO
       // 知识点2 写的时候要调用tagListModel.create
-     store.createTag(name)
+      // store.createTag(name);
     }
   }
 }

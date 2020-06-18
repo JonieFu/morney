@@ -20,12 +20,18 @@
 // 导出一个选项
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
-import store from "@/store/index2";
 
-@Component
+@Component({
+  computed: {
+    tagList() {
+      // return this.$store.fetchTags();
+      return [];
+    }
+  }
+})
 export default class Tags extends Vue {
   // data
-  tagList = store.fetchTag();
+
   selectedTags: string[] = [];
   // methods
   toggle(tag: string) {
@@ -43,11 +49,13 @@ export default class Tags extends Vue {
       return;
     } else if (name === "") {
       window.alert("标签名不为空");
-    } else {
-      if (this.tagList) {
-        store.createTag(name);
-      }
     }
+    // TODO
+    // else {
+    //   if (this.tagList) {
+    //     store.createTag(name);
+    //   }
+    // }
   }
 }
 </script>
