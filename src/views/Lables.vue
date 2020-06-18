@@ -19,17 +19,25 @@ import Vue from "vue";
 
 import { Component } from "vue-property-decorator";
 
-@Component
+@Component({
+  computed: {
+    tags() {
+      return this.$store.state.tagList;
+    }
+  }
+})
 export default class Lables extends Vue {
   // 知识点1 读取
   // TODO
-  // tags = store.tagList;
+  created() {
+    this.$store.commit("fetchTag");
+  }
   createTag() {
     const name = window.prompt("输入新增标签名")!;
-    if (name) {
-      //TODO
-      // 知识点2 写的时候要调用tagListModel.create
-      // store.createTag(name);
+    if (!name) {
+      window.alert("标签名不为空");
+    } else {
+      this.$store.commit("createTag", name);
     }
   }
 }

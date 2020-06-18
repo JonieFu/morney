@@ -1,15 +1,37 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import clone from "../lib/clone";
-import recordStore from "./recordStore";
+import createId from "@/lib/createId";
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
   state: {
     recordList: [] as RecordItem[],
+    tagList: [] as Tag[],
   },
 
   mutations: {
+    fetchTag(state) {
+      state.tagList = JSON.parse(
+        window.localStorage.getItem("recordList") || "[]"
+      );
+    },
+    createTag(state, name: string) {
+      const names = state.tagList.map((item) => item.name);
+      if (names.indexOf(name) >= 0) {
+        window.alert("标签已存在");
+        return "duplicated";
+      } else {
+        const id = createId().toString();
+        state.tagList.push({ id: id, name: name });
+        store.commit("saveTags");
+        window.alert("创建标签成功");
+        return "success";
+      }
+    },
+    saveTags(state) {
+      window.localStorage.setItem("recordList", JSON.stringify(state.tagList));
+    },
     fetchRecords(state) {
       state.recordList = JSON.parse(
         window.localStorage.getItem("recordList") || "[]"
