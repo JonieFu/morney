@@ -2,7 +2,7 @@
   <div>
     <Layout>
       <div class="tags">
-        <router-link class="tag" v-for="tag in tags" :key="tag.id" :to="`/lables/edit/${tag.id}`">
+        <router-link class="tag" v-for="tag in tags" :key="tag.id" :to="`/labels/edit/${tag.id}`">
           <span>{{ tag.name }}</span>
           <Icon name="right" />
         </router-link>
@@ -16,19 +16,15 @@
 
 <script lang="ts">
 import Vue from "vue";
-
 import { Component } from "vue-property-decorator";
 
-@Component({
-  computed: {
-    tags() {
-      return this.$store.state.tagList;
-    }
-  }
-})
-export default class Lables extends Vue {
+@Component
+export default class Labels extends Vue {
   // 知识点1 读取
   // TODO
+  get tags() {
+    return this.$store.state.tagList;
+  }
   created() {
     this.$store.commit("fetchTag");
   }

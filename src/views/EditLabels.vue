@@ -6,7 +6,7 @@
         <span class="title">编辑标签</span>
       </div>
       <div class="form-wrapper">
-        <FormItem :value="tag.name" @update:value="updateTag" fieldName="标签名" placeholder="请编辑标签" />
+        <FormItem :value="tag.name" @update:value="update" fieldName="标签名" placeholder="请编辑标签" />
       </div>
       <div class="button-wrapper">
         <Button @click="remove">删除标签</Button>
@@ -19,31 +19,34 @@
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
 import FormItem from "../components/Money/FormItem.vue";
+import Button from "@/components/Button.vue";
 
-@Component({ components: { FormItem } })
-export default class EditLables extends Vue {
-  // data
-  tag?: { id: string; name: string } = undefined;
+@Component({
+  components: { Button, FormItem }
+})
+export default class EditLabels extends Vue {
+  // computed
+  get tag() {
+    return this.$store.state.currentTag;
+  }
   // hooks
   created() {
-    // TODO
-    // this.tag = store.findTag(this.$route.params.id);
+    const id = this.$route.params.id;
+    this.$store.commit("fetchTag");
+    this.$store.commit("setCurrentTag", id);
+
     if (!this.tag) {
+      console.log("错了");
       this.$router.replace("/404");
     }
   }
   // methods
-  updateTag(name: string) {
-    if (this.tag) {
-      // TODO
-      // store.updateTag(this.tag.id, name);
-    }
+  update(name: string) {
+    this.$store.commit("updateTag", { id: this.tag.id, name });
   }
   remove() {
     if (this.tag) {
-      // TODO
-      // store.removeTag(this.tag.id);
-      this.goBack();
+      this.$store.commit("removeTag", this.tag.id);
     }
   }
   goBack() {

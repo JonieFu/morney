@@ -3,7 +3,7 @@
     <router-link to="/money" class="item" active-class="selected">
       <Icon name="money" />记账
     </router-link>
-    <router-link to="/lables" class="item" active-class="selected">
+    <router-link to="/labels" class="item" active-class="selected">
       <Icon name="Lable" />标签
     </router-link>
     <router-link to="/statistics" class="item" active-class="selected">

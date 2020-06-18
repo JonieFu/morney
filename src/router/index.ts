@@ -1,10 +1,10 @@
 import Money from "@/views/Money.vue";
 import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
-import Lables from "@/views/Lables.vue";
+import Labels from "@/views/Labels.vue";
 import Statistics from "@/views/Statistics.vue";
 import NotFound from "@/views/Not_Found.vue";
-import EditLables from "@/views/EditLables.vue";
+import EditLabels from "@/views/EditLabels.vue";
 
 Vue.use(VueRouter);
 
@@ -18,16 +18,16 @@ const routes: Array<RouteConfig> = [
     component: Money,
   },
   {
-    path: "/lables",
-    component: Lables,
+    path: "/labels",
+    component: Labels,
   },
   {
     path: "/statistics",
     component: Statistics,
   },
   {
-    path: "/lables/edit/:id",
-    component: EditLables,
+    path: "/labels/edit/:id",
+    component: EditLabels,
   },
   {
     path: "*",
