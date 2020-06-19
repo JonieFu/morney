@@ -6,7 +6,12 @@
         <span class="title">编辑标签</span>
       </div>
       <div class="form-wrapper">
-        <FormItem :value="tag.name" @update:value="update" fieldName="标签名" placeholder="请编辑标签" />
+        <FormItem
+          :value="currentTag.name"
+          @update:value="update"
+          fieldName="标签名"
+          placeholder="请编辑标签"
+        />
       </div>
       <div class="button-wrapper">
         <Button @click="remove">删除标签</Button>
@@ -14,7 +19,7 @@
     </Layout>
   </div>
 </template>
-
+s
 <script lang="ts">
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
@@ -26,7 +31,7 @@ import Button from "@/components/Button.vue";
 })
 export default class EditLabels extends Vue {
   // computed
-  get tag() {
+  get currentTag() {
     return this.$store.state.currentTag;
   }
   // hooks
@@ -35,18 +40,18 @@ export default class EditLabels extends Vue {
     this.$store.commit("fetchTag");
     this.$store.commit("setCurrentTag", id);
 
-    if (!this.tag) {
+    if (!this.currentTag) {
       console.log("错了");
       this.$router.replace("/404");
     }
   }
   // methods
   update(name: string) {
-    this.$store.commit("updateTag", { id: this.tag.id, name });
+    this.$store.commit("updateTag", { id: this.currentTag.id, name });
   }
   remove() {
-    if (this.tag) {
-      this.$store.commit("removeTag", this.tag.id);
+    if (this.currentTag) {
+      this.$store.commit("removeTag", this.currentTag.id);
     }
   }
   goBack() {

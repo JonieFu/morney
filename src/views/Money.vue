@@ -34,13 +34,15 @@ export default class Money extends Vue {
     this.$store.commit("fetchRecords");
   }
   // computed
-  get recordList() {
-    return this.$store.state.recordList;
-  }
-  get tags() {
-    // TODO
-    return this.$store.state.count1;
-  }
+  // get recordList() {
+  //   return this.$store.state.recordList;
+  // }
+  // get tags() {
+  //   // TODO
+  //   console.log("tags");
+
+  //   return this.$store.state.tagList;
+  // }
   // methods
   onUpdateNotes(value: string) {
     this.record.notes = value;

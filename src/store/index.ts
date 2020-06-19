@@ -45,12 +45,10 @@ const store = new Vuex.Store({
       for (let i = 0; i < state.tagList.length; i++) {
         if (state.tagList[i].id === id) {
           index = i;
-          state.tagList.splice(index, 1);
+          state.tagList.splice(index, 1)
           store.commit("saveTags");
           window.alert("删除标签成功");
           router.back();
-        } else {
-          window.alert("删除失败")
         }
       }
     },
