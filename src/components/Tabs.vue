@@ -1,6 +1,7 @@
 <template>
   <div class="tabs">
     <li
+      class="tabs-item"
       :class="liClass(item)"
       v-for="item in dataSource"
       :key="item.value"
@@ -42,7 +43,7 @@ export default class Tabs extends Vue {
   justify-content: space-evenly;
   text-align: center;
   font-size: 24px;
-  > li {
+  &-item {
     width: 50%;
     line-height: 64px;
     height: 64px;

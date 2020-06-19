@@ -1,10 +1,9 @@
-declare type RecordItem = {
+type RecordItem = {
   tags: string[];
   notes: string;
   type: string;
   amount: number;
-  // ?是指这个属性有没有都行
-  createdAt?: Date;
+  createdAt?: string;
 };
 type Tag = {
   id: string;
@@ -18,4 +17,10 @@ type TagListModel = {
   remove: (id: string) => void;
   save: () => void;
 };
-interface Window {}
+
+type RootState = {
+  recordList: RecordItem[];
+  tagList: Tag[];
+  currentTag?: Tag;
+};
+
