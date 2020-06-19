@@ -13,21 +13,16 @@ import Vue from "vue";
 import Types from "@/components/Money/Types.vue";
 import Component from "vue-class-component";
 import Tabs from "@/components/Tabs.vue";
+import intervalList from "@/constants/interval";
+import typeList from "@/constants/typelist";
 @Component({
   components: { Types, Tabs }
 })
 export default class Statistic extends Vue {
   type = "-";
   interval = "day";
-  intervallist = [
-    { text: "按天", value: "day" },
-    { text: "按周", value: "week" },
-    { text: "按月", value: "month" }
-  ];
-  typelist = [
-    { text: "支出", value: "-" },
-    { text: "收入", value: "+" }
-  ];
+  intervallist = intervalList;
+  typelist = typeList;
 }
 </script>
 
