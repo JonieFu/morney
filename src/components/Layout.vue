@@ -10,7 +10,7 @@
 <script>
 export default {
   name: "Layout",
-  props: ["classPrefix"]
+  props: ["classPrefix"],
 };
 </script>
 
@@ -21,6 +21,7 @@ export default {
   height: 100vh;
 }
 .content {
+  overflow: auto;
   flex-grow: 1;
 }
 </style>

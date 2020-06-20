@@ -1,17 +1,17 @@
-
 <template>
   <div>
     <Layout>
       <Tabs class-prefix="type" :data-source="typelist" :value.sync="type" />
-      <Tabs class-prefix="interval" :data-source="intervallist" :value.sync="interval" />
       <ol>
-        <li v-for="(group,index) in result" :key="index">
-          <h3 class="title">{{group.title}}</h3>
+        <li v-for="(group, index) in groupList" :key="index">
+          <h3 class="title">
+            {{ beautify(group.title) }}<span>￥{{ group.total }}</span>
+          </h3>
           <ol>
             <li v-for="item in group.items" :key="item.id" class="record">
-              <span>{{tagString(item.tags)}}</span>
-              <span class="notes">{{item.notes}}</span>
-              <span>￥{{item.amount}}</span>
+              <span>{{ tagString(item.tags) }}</span>
+              <span class="notes">{{ item.notes }}</span>
+              <span>￥{{ item.amount }}</span>
             </li>
           </ol>
         </li>
@@ -24,53 +24,102 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import Tabs from "@/components/Tabs.vue";
-import intervalList from "@/constants/interval";
 import typeList from "@/constants/typelist";
+import dayjs from "dayjs";
+import clone from "@/lib/clone.ts";
 @Component({
-  components: { Tabs }
+  components: { Tabs },
 })
 export default class Statistic extends Vue {
   tagString(tags: Tag[]) {
-    return tags.length === 0 ? "无" : tags.join(",");
+    if (tags.length === 0) {
+      return "无";
+    } else if (tags.length === 1) {
+      return tags[0].name;
+    } else {
+      let tagName = "";
+      for (let i = 0; i < tags.length; i++) {
+        tagName += tags[i].name + " ";
+      }
+      return tagName;
+    }
+  }
+  beautify(string: string) {
+    const day = dayjs(string);
+    const now = dayjs();
+    if (day.isSame(new Date(), "day")) {
+      return "今天";
+    } else if ((day.isSame(now.subtract(1, "day")), "day")) {
+      return "昨天";
+    } else if ((day.isSame(now.subtract(1, "day")), "day")) {
+      return "前天";
+    } else {
+      return day.format("YYYY年MM月DD日");
+    }
   }
   get recordList() {
     return (this.$store.state as RootState).recordList;
   }
-  get result() {
+  get groupList() {
     const { recordList } = this;
-
-    type HashTableItem = { title: string; items: RecordItem[] };
-    const hashTable: { [key: string]: HashTableItem } = {};
-    for (let i = 0; i < recordList.length; i++) {
-      const [date, time] = recordList[i].createdAt!.split("T");
-      hashTable[date] = hashTable[date] || { title: date, items: [] };
-      hashTable[date].items.push(recordList[i]);
+    if (recordList.length === 0) {
+      return [];
     }
-    return hashTable;
+    const newList = clone(recordList)
+      .filter((r) => r.type === this.type)
+      .sort(
+        (a, b) => dayjs(b.createdAt).valueOf() - dayjs(a.createdAt).valueOf()
+      );
+    type Result = {
+      title: string;
+      total?: number;
+      items: RecordItem[];
+    }[];
+    const result: Result = [
+      {
+        title: dayjs(newList[0].createdAt).format("YYYY-MM-DD"),
+
+        items: [newList[0]],
+      },
+    ];
+    for (let i = 1; i < newList.length; i++) {
+      const current = newList[i];
+      const last = result[result.length - 1];
+      if (dayjs(last.title).isSame(dayjs(current.createdAt), "day")) {
+        last.items.push(current);
+      } else {
+        result.push({
+          title: dayjs(current.createdAt).format("YYYY-MM-DD"),
+
+          items: [current],
+        });
+      }
+    }
+    console.log(result);
+    result.map((group) => {
+      group.total = group.items.reduce((sum, item) => sum + item.amount, 0);
+    });
+    return result;
   }
   created() {
     this.$store.commit("fetchRecords");
   }
   type = "-";
-  interval = "day";
-  intervallist = intervalList;
   typelist = typeList;
 }
 </script>
 
 <style lang="scss" scoped>
 ::v-deep .type-item {
-  background: white;
+  background: #c4c4c4;
   &.selected {
-    background: #c4c4c4;
+    background: white;
     &::after {
       display: none;
     }
   }
 }
-::v-deep .interval-item {
-  height: 48px;
-}
+
 %item {
   padding: 8px 16px;
   line-height: 24px;

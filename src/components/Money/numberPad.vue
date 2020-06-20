@@ -1,6 +1,6 @@
 <template>
   <div class="numberPad">
-    <div class="output">{{output}}</div>
+    <div class="output">{{ output }}</div>
     <div class="buttons">
       <button @click="inputContent">1</button>
       <button @click="inputContent">2</button>
@@ -53,7 +53,6 @@ export default class NumberPad extends Vue {
     this.output = "0";
   }
   ok() {
-    console.log("ok");
     this.$emit("update:value", parseFloat(this.output));
     this.$emit("submit", parseFloat(this.output));
     this.clear();

@@ -3,7 +3,11 @@
     <Layout class-prefix="layout">
       <number-pad :value.sync="record.amount" @submit="saveRecord" />
       <Tabs :dataSource="typelist" :value.sync="record.type" />
-      <FormItem field-name="备注" placeholder="在这里添加备注" @update:value="onUpdateNotes" />
+      <FormItem
+        field-name="备注"
+        placeholder="在这里添加备注"
+        @update:value="onUpdateNotes"
+      />
       <Tags @update:value="onUpdateTags" />
     </Layout>
   </div>
@@ -20,7 +24,7 @@ import store from "@/store/index";
 import typeList from "@/constants/typelist";
 import Tabs from "@/components/Tabs.vue";
 @Component({
-  components: { NumberPad, FormItem, Tags, Tabs }
+  components: { NumberPad, FormItem, Tags, Tabs },
 })
 export default class Money extends Vue {
   // data
@@ -28,7 +32,7 @@ export default class Money extends Vue {
     tags: [],
     notes: "",
     type: "-",
-    amount: 0
+    amount: 0,
   };
   typelist = typeList;
   // hooks
@@ -47,7 +51,7 @@ export default class Money extends Vue {
   onUpdateNotes(value: string) {
     this.record.notes = value;
   }
-  onUpdateTags(tags: string[]) {
+  onUpdateTags(tags: Tag[]) {
     this.record.tags = tags;
   }
   saveRecord() {
@@ -55,10 +59,12 @@ export default class Money extends Vue {
   }
 }
 </script>
-<style lang="scss">
-.layout-content {
+<style lang="scss" scoped>
+::v-deep .layout-content {
   display: flex;
   flex-direction: column-reverse;
 }
+.notes {
+  padding: 12px 0;
+}
 </style>
-
