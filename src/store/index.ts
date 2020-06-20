@@ -73,6 +73,8 @@ const store = new Vuex.Store({
       );
     },
     createRecord(state, record: RecordItem) {
+      console.log("怎么回事？");
+
       const record2: RecordItem = clone(record);
       record2.createdAt = dayjs().format()
       state.recordList.push(record2);
