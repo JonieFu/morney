@@ -53,6 +53,7 @@ export default class Tags extends Vue {
       return;
     } else {
       this.$store.commit("createTag", name);
+      window.alert("新建标签成功");
     }
   }
 }
