@@ -1,12 +1,13 @@
-
 <template>
-  <svg class="icon">
+  <svg :class="classPrefix + '-item'" class="icon">
     <use :xlink:href="'#' + name" />
     <!-- XML支持 -->
   </svg>
 </template>
 
 <script lang="ts">
+import { Component, Prop } from "vue-property-decorator";
+import Vue from "vue";
 let importAll = (requireContext: __WebpackModuleApi.RequireContext) => {
   return requireContext.keys().forEach(requireContext);
 };
@@ -16,10 +17,11 @@ try {
 } catch (error) {
   console.log(error);
 }
-export default {
-  props: ["name"],
-  name: "icon"
-};
+@Component
+export default class Icon extends Vue {
+  @Prop(String) name!: string;
+  @Prop(String) classPrefix?: string;
+}
 </script>
 
 <style lang="scss" scoped>

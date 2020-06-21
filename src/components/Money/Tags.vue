@@ -8,9 +8,11 @@
         <li
           v-for="tag in tagList"
           :key="tag.id"
-          :class="{selected:selectedTags.indexOf(tag)>=0}"
+          :class="{ selected: selectedTags.indexOf(tag) >= 0 }"
           @click="toggle(tag)"
-        >{{tag.name}}</li>
+        >
+          {{ tag.name }}
+        </li>
       </ul>
     </div>
   </div>
@@ -45,8 +47,10 @@ export default class Tags extends Vue {
   }
   create() {
     const name = window.prompt("请输入新标签名");
-    if (!name) {
+    if (name === "") {
       window.alert("标签名不为空");
+    } else if (name === null) {
+      return;
     } else {
       this.$store.commit("createTag", name);
     }

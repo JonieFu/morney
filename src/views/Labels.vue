@@ -2,7 +2,12 @@
   <div>
     <Layout>
       <div class="tags">
-        <router-link class="tag" v-for="tag in tags" :key="tag.id" :to="`/labels/edit/${tag.id}`">
+        <router-link
+          class="tag"
+          v-for="tag in tags"
+          :key="tag.id"
+          :to="`/labels/edit/${tag.id}`"
+        >
           <span>{{ tag.name }}</span>
           <Icon name="right" />
         </router-link>
@@ -30,8 +35,10 @@ export default class Labels extends Vue {
   }
   createTag() {
     const name = window.prompt("输入新增标签名")!;
-    if (!name) {
+    if (name === "") {
       window.alert("标签名不为空");
+    } else if (name === null) {
+      return;
     } else {
       this.$store.commit("createTag", name);
     }

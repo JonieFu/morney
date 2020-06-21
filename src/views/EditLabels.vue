@@ -41,7 +41,6 @@ export default class EditLabels extends Vue {
     this.$store.commit("setCurrentTag", id);
 
     if (!this.currentTag) {
-      console.log("错了");
       this.$router.replace("/404");
     }
   }

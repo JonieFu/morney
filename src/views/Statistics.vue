@@ -2,7 +2,7 @@
   <div>
     <Layout>
       <Tabs class-prefix="type" :data-source="typelist" :value.sync="type" />
-      <ol>
+      <ol v-if="groupList.length > 0">
         <li v-for="(group, index) in groupList" :key="index">
           <h3 class="title">
             {{ beautify(group.title) }}<span>￥{{ group.total }}</span>
@@ -16,6 +16,12 @@
           </ol>
         </li>
       </ol>
+      <div v-else class="noResult">
+        目前没有相关记录
+        <div class="div">
+          <Icon class-prefix="Icon" name="cry" />
+        </div>
+      </div>
     </Layout>
   </div>
 </template>
@@ -27,22 +33,13 @@ import Tabs from "@/components/Tabs.vue";
 import typeList from "@/constants/typelist";
 import dayjs from "dayjs";
 import clone from "@/lib/clone.ts";
+
 @Component({
   components: { Tabs },
 })
 export default class Statistic extends Vue {
   tagString(tags: Tag[]) {
-    if (tags.length === 0) {
-      return "无";
-    } else if (tags.length === 1) {
-      return tags[0].name;
-    } else {
-      let tagName = "";
-      for (let i = 0; i < tags.length; i++) {
-        tagName += tags[i].name + " ";
-      }
-      return tagName;
-    }
+    return tags.length === 0 ? "无" : tags.map((t) => t.name).join(", ");
   }
   beautify(string: string) {
     const day = dayjs(string);
@@ -78,7 +75,8 @@ export default class Statistic extends Vue {
     }[];
 
     if (newList.length === 0) {
-      console.log("无数据");
+      const result: Result = [];
+      return result;
     } else {
       const result: Result = [
         {
@@ -99,7 +97,6 @@ export default class Statistic extends Vue {
           });
         }
       }
-      console.log(result);
       result.map((group) => {
         group.total = group.items.reduce((sum, item) => sum + item.amount, 0);
       });
@@ -114,6 +111,7 @@ export default class Statistic extends Vue {
 }
 </script>
 
+<style></style>
 <style lang="scss" scoped>
 ::v-deep .type-item {
   background: #c4c4c4;
@@ -124,7 +122,15 @@ export default class Statistic extends Vue {
     }
   }
 }
-
+::v-deep .icon.Icon-item {
+  margin-top: 20px;
+  width: 10em;
+  height: 10em;
+}
+.noResult {
+  padding: 16px;
+  text-align: center;
+}
 %item {
   padding: 8px 16px;
   line-height: 24px;
