@@ -1,7 +1,10 @@
 <template>
   <div>
-    <label class="notes">
-      <span class="name">{{fieldName}}</span>
+    <label class="notes" :class="classPrefix+'-lable'">
+      <span class="name" :class="classPrefix+'-items'">
+        <Icon name="write" />
+        {{ fieldName }}
+      </span>
       <input
         type="text"
         :value="value"
@@ -20,7 +23,8 @@ export default class Notes extends Vue {
   // props
   @Prop(String) readonly fieldName!: string;
   @Prop(String) readonly placeholder!: string;
-  @Prop({ default: "" }) readonly value!: string;
+  @Prop(String) classPrefix?: string;
+  @Prop(String) readonly value!: string;
   // methods
   onValueChanged(value: string) {
     this.$emit("update:value", value);
@@ -31,7 +35,7 @@ export default class Notes extends Vue {
 <style lang="scss" scoped>
 .notes {
   display: block;
-  font-size: 14px;
+  font-size: 16px;
   padding-left: 16px;
   display: flex;
   align-items: center;
@@ -39,6 +43,7 @@ export default class Notes extends Vue {
     padding-right: 16px;
   }
   input {
+    padding-left: 10px;
     background: transparent;
     border: none;
     height: 40px;

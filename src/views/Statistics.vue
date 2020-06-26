@@ -1,25 +1,28 @@
 <template>
   <div>
     <Layout>
-      <Tabs class-prefix="type" :data-source="typelist" :value.sync="type" />
-      <ol v-if="groupList.length > 0">
-        <li v-for="(group, index) in groupList" :key="index">
-          <h3 class="title">
-            {{ beautify(group.title) }}<span>￥{{ group.total }}</span>
-          </h3>
-          <ol>
-            <li v-for="item in group.items" :key="item.id" class="record">
-              <span>{{ tagString(item.tags) }}</span>
-              <span class="notes">{{ item.notes }}</span>
-              <span>￥{{ item.amount }}</span>
-            </li>
-          </ol>
-        </li>
-      </ol>
-      <div v-else class="noResult">
-        目前没有相关记录
-        <div class="div">
-          <Icon class-prefix="Icon" name="cry" />
+      <Tabs class-prefix="type" :data-source="typeList" :value.sync="type" />
+      <div class="wrapper">
+        <ol v-if="groupList.length > 0">
+          <li v-for="(group, index) in groupList" :key="index">
+            <h3 class="title">
+              {{ beautify(group.title) }}
+              <span>￥{{ group.total }}</span>
+            </h3>
+            <ol>
+              <li v-for="item in group.items" :key="item.id" class="record">
+                <span>{{ tagString(item.tags) }}</span>
+                <span class="notes">{{ item.notes }}</span>
+                <span>￥{{ item.amount }}</span>
+              </li>
+            </ol>
+          </li>
+        </ol>
+        <div v-else class="noResult">
+          目前没有相关记录
+          <div class="div">
+            <Icon class-prefix="Icon" name="cry" />
+          </div>
         </div>
       </div>
     </Layout>
@@ -30,16 +33,21 @@
 import Vue from "vue";
 import Component from "vue-class-component";
 import Tabs from "@/components/Tabs.vue";
-import typeList from "@/constants/typelist";
+import typeList from "@/constants/typeList";
 import dayjs from "dayjs";
 import clone from "@/lib/clone.ts";
 
 @Component({
-  components: { Tabs },
+  components: { Tabs }
 })
 export default class Statistic extends Vue {
+  // data
+  type = "-";
+  typeList = typeList;
+  //metho
+
   tagString(tags: Tag[]) {
-    return tags.length === 0 ? "无" : tags.map((t) => t.name).join(", ");
+    return tags.length === 0 ? "无" : tags.map(t => t.name).join(", ");
   }
   beautify(string: string) {
     const day = dayjs(string);
@@ -54,6 +62,8 @@ export default class Statistic extends Vue {
       return day.format("YYYY年MM月DD日");
     }
   }
+
+  //method
   get recordList() {
     return (this.$store.state as RootState).recordList;
   }
@@ -63,7 +73,7 @@ export default class Statistic extends Vue {
       return [];
     }
     const newList = clone(recordList)
-      .filter((r) => r.type === this.type)
+      .filter(r => r.type === this.type)
       .sort(
         (a, b) => dayjs(b.createdAt).valueOf() - dayjs(a.createdAt).valueOf()
       );
@@ -81,8 +91,8 @@ export default class Statistic extends Vue {
       const result: Result = [
         {
           title: dayjs(newList[0].createdAt).format("YYYY-MM-DD"),
-          items: [newList[0]],
-        },
+          items: [newList[0]]
+        }
       ];
       for (let i = 1; i < newList.length; i++) {
         const current = newList[i];
@@ -93,30 +103,31 @@ export default class Statistic extends Vue {
         } else {
           result.push({
             title: dayjs(current.createdAt).format("YYYY-MM-DD"),
-            items: [current],
+            items: [current]
           });
         }
       }
-      result.map((group) => {
+      result.map(group => {
         group.total = group.items.reduce((sum, item) => sum + item.amount, 0);
       });
       return result;
     }
   }
+  // hooks
   created() {
     this.$store.commit("fetchRecords");
   }
-  type = "-";
-  typelist = typeList;
 }
 </script>
 
 <style></style>
 <style lang="scss" scoped>
 ::v-deep .type-item {
-  background: #c4c4c4;
+  color: #f19b37;
+  background: white;
   &.selected {
-    background: white;
+    color: #333;
+    background: #f3f3f3;
     &::after {
       display: none;
     }
@@ -130,6 +141,9 @@ export default class Statistic extends Vue {
 .noResult {
   padding: 16px;
   text-align: center;
+}
+.wrapper {
+  overflow: auto;
 }
 %item {
   padding: 8px 16px;

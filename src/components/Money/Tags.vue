@@ -10,9 +10,7 @@
           :key="tag.id"
           :class="{ selected: selectedTags.indexOf(tag) >= 0 }"
           @click="toggle(tag)"
-        >
-          {{ tag.name }}
-        </li>
+        >{{ tag.name }}</li>
       </ul>
     </div>
   </div>
@@ -46,7 +44,7 @@ export default class Tags extends Vue {
     this.$emit("update:value", this.selectedTags);
   }
   create() {
-    const name = window.prompt("请输入新标签名");
+    const name = window.prompt("请输入两个字的新标签名");
     if (name === "") {
       window.alert("标签名不为空");
     } else if (name === null) {
@@ -60,44 +58,49 @@ export default class Tags extends Vue {
 </script>
 <style lang="scss" scoped>
 .tags {
+  background: #fff;
   padding: 16px;
-  background: white;
-  height: 20vh;
-  font-size: 14px;
+  padding-left: 22px;
   display: flex;
-  flex-grow: 1;
   flex-direction: column-reverse;
+  flex-grow: 1;
   > .wrapper {
-    overflow-y: auto;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column-reverse;
     > .current {
-      display: block;
       display: flex;
       flex-wrap: wrap;
-      margin-right: -16px;
+
       > li {
+        display: inline-block;
+
+        margin-left: 8px;
+        margin-right: 8px;
         $h: 24px;
         height: $h;
         border-radius: $h/2;
         line-height: $h;
         padding: 0 16px;
-        margin-right: 12px;
-        margin-bottom: 6px;
-        background: #d9d9d9;
+        margin-bottom: 20px;
+        background: #f5f5f5;
         &.selected {
-          background: pink;
+          background: #f6e69d;
         }
       }
     }
   }
   > .new {
-    padding-top: 16px;
+    margin-top: -10px;
     button {
       background: transparent;
       border: none;
       color: #999;
       border-bottom: 1px solid black;
+      margin-left: 5px;
       padding: 0 3px;
     }
   }
 }
 </style>
+

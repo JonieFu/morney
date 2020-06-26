@@ -1,20 +1,20 @@
 <template>
   <nav>
+    <router-link to="/statistics" class="item" active-class="selected">
+      <Icon name="statistics" />明细
+    </router-link>
     <router-link to="/money" class="item" active-class="selected">
       <Icon name="money" />记账
     </router-link>
     <router-link to="/labels" class="item" active-class="selected">
       <Icon name="Lable" />标签
     </router-link>
-    <router-link to="/statistics" class="item" active-class="selected">
-      <Icon name="statistics" />统计
-    </router-link>
   </nav>
 </template>
 
 <script lang="ts">
 export default {
-  name: "Nav"
+  name: "Nav",
 };
 </script>
 
@@ -33,12 +33,12 @@ nav {
     justify-content: center;
     align-items: center;
     .icon {
-      width: 32px;
-      height: 32px;
+      width: 24px;
+      height: 24px;
     }
   }
   > .item.selected {
-    color: $color-highlight;
+    color: #feda47;
   }
 }
 </style>

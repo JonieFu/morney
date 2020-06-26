@@ -10,18 +10,17 @@
 <script>
 export default {
   name: "Layout",
-  props: ["classPrefix"],
+  props: ["classPrefix"]
 };
 </script>
-
 <style lang="scss" scoped>
 .Layout-wrapper {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  height: 100vh;
 }
 .content {
-  overflow: auto;
   flex-grow: 1;
+  overflow: auto;
 }
 </style>

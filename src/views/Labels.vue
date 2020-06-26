@@ -2,18 +2,13 @@
   <div>
     <Layout>
       <div class="tags">
-        <router-link
-          class="tag"
-          v-for="tag in tags"
-          :key="tag.id"
-          :to="`/labels/edit/${tag.id}`"
-        >
+        <router-link class="tag" v-for="tag in tags" :key="tag.id" :to="`/labels/edit/${tag.id}`">
           <span>{{ tag.name }}</span>
           <Icon name="right" />
         </router-link>
       </div>
       <div class="createTag-wrapper">
-        <Button class="createTag" @click="createTag">新增标签</Button>
+        <Button class="createTag" @click="createTag">#添加标签#</Button>
       </div>
     </Layout>
   </div>
@@ -67,7 +62,12 @@ export default class Labels extends Vue {
   }
 }
 .createTag-wrapper {
-  margin-top: 24px;
+  position: fixed;
+  margin: 0, auto;
+  left: 50%;
+  margin-left: -49px;
+  bottom: 60px;
   text-align: center;
+  z-index: 1;
 }
 </style>

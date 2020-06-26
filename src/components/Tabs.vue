@@ -6,7 +6,7 @@
       v-for="item in dataSource"
       :key="item.value"
       @click="select(item)"
-    >{{item.text}}</li>
+    >{{ item.text }}</li>
   </div>
 </template>
 
@@ -38,27 +38,24 @@ export default class Tabs extends Vue {
 
 <style lang="scss" scoped>
 .tabs {
-  background: #c4c4c4;
+  background: #f3f3f3;
   display: flex;
   justify-content: space-evenly;
   text-align: center;
-  font-size: 24px;
+  font-size: 16px;
+  font-weight: 700;
   &-item {
     width: 50%;
-    line-height: 64px;
-    height: 64px;
+    line-height: 40px;
+    height: 40px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     position: relative;
-    &.selected::after {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 4px;
-      background: #333333;
+    &.selected {
+      background: white;
+      color: #f19b37;
     }
   }
 }

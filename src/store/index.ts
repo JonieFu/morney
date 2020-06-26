@@ -21,10 +21,22 @@ const store = new Vuex.Store({
         window.localStorage.getItem("tagList") || "[]"
       );
       if (!state.tagList || state.tagList.length === 0) {
-        store.commit("createTag", "衣")
-        store.commit("createTag", "食")
-        store.commit("createTag", "住")
-        store.commit("createTag", "行")
+        store.commit("createTag", "餐饮")
+        store.commit("createTag", "购物")
+        store.commit("createTag", "居住")
+        store.commit("createTag", "交通")
+        store.commit("createTag", "娱乐")
+        store.commit("createTag", "医疗")
+        store.commit("createTag", "礼金")
+        store.commit("createTag", "日用")
+        store.commit("createTag", "旅游")
+        store.commit("createTag", "美容")
+        store.commit("createTag", "宠物")
+        store.commit("createTag", "恋爱")
+        store.commit("createTag", "工资")
+        store.commit("createTag", "兼职")
+        store.commit("createTag", "奖金")
+        store.commit("createTag", "报销")
       }
     },
     createTag(state, name: string) {
