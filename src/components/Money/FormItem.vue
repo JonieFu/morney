@@ -28,6 +28,7 @@ export default class Notes extends Vue {
   // methods
   onValueChanged(value: string) {
     this.$emit("update:value", value);
+    window.scrollTo(0, 200);
   }
 }
 </script>

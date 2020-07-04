@@ -7,7 +7,6 @@
         :notes="record.notes"
         @update:notes="record.notes =$event"
       />
-      <!-- <FormItem field-name="备注:" placeholder="在这里添加备注" :value.sync="record.notes" /> -->
       <Tags :tags="record.tags" @update:value="onUpdateTags" />
       <Tabs class="tabs" :dataSource="typeList" :value.sync="record.type" />
     </Layout>
