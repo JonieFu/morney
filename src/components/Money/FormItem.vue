@@ -25,10 +25,16 @@ export default class Notes extends Vue {
   @Prop(String) readonly placeholder!: string;
   @Prop(String) classPrefix?: string;
   @Prop(String) readonly value!: string;
+
+  mounted() {
+    const input = document.querySelector("input") as HTMLInputElement;
+    input.addEventListener("blur", function() {
+      window.scrollTo(0,500)
+    });
+  }
   // methods
   onValueChanged(value: string) {
     this.$emit("update:value", value);
-    window.scrollTo(0, 200);
   }
 }
 </script>
