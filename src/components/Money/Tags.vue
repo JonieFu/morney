@@ -68,13 +68,13 @@ export default class Tags extends Vue {
     flex-grow: 1;
     display: flex;
     flex-direction: column-reverse;
+    overflow: auto;
+    height: 0;
     > .current {
       display: flex;
       flex-wrap: wrap;
-
       > li {
         display: inline-block;
-
         margin-left: 8px;
         margin-right: 8px;
         $h: 24px;
