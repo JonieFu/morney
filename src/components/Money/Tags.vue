@@ -64,15 +64,16 @@ export default class Tags extends Vue {
   display: flex;
   flex-direction: column-reverse;
   flex-grow: 1;
+  height: 0;
   > .wrapper {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column-reverse;
+    /* flex-grow: 1; */
+    /* display: flex; */
+    /* flex-direction: column-reverse; */
     overflow: auto;
-    height: 0;
-    &::-webkit-scrollbar {
+    /* height: 0; */
+    /* &::-webkit-scrollbar {
       display: none;
-    }
+    } */
     > .current {
       display: flex;
       flex-wrap: wrap;

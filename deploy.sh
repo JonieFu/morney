@@ -14,7 +14,7 @@ cd dist
 
 git init
 git add -A
-git commit -m '修改了flex布局下overflow失效的问题'
+git commit -m '修改新增标签的margin-top'
 
 # 部署到 https://<USERNAME>.github.io
 # git push -f git@github.com:<USERNAME>/<USERNAME>.github.io.git master
