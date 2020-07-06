@@ -14,7 +14,7 @@ cd dist
 
 git init
 git add -A
-git commit -m '完成手机端键盘退出后留白问题'
+git commit -m '修改了flex布局下overflow失效的问题'
 
 # 部署到 https://<USERNAME>.github.io
 # git push -f git@github.com:<USERNAME>/<USERNAME>.github.io.git master

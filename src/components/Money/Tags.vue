@@ -69,7 +69,11 @@ export default class Tags extends Vue {
     display: flex;
     flex-direction: column-reverse;
     overflow: auto;
+
     height: 0;
+    &::-webkit-scrollbar {
+      display: none;
+    }
     > .current {
       display: flex;
       flex-wrap: wrap;
@@ -91,7 +95,7 @@ export default class Tags extends Vue {
     }
   }
   > .new {
-    margin-top: -10px;
+    margin-top: 5px;
     button {
       background: transparent;
       border: none;
