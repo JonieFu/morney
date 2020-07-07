@@ -70,6 +70,7 @@ export default class Tags extends Vue {
     /* display: flex; */
     /* flex-direction: column-reverse; */
     overflow: auto;
+    -webkit-overflow-scrolling: touch;
     /* height: 0; */
     /* &::-webkit-scrollbar {
       display: none;

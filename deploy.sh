@@ -14,7 +14,7 @@ cd dist
 
 git init
 git add -A
-git commit -m '修改新增标签的margin-top'
+git commit -m '手机调试'
 
 # 部署到 https://<USERNAME>.github.io
 # git push -f git@github.com:<USERNAME>/<USERNAME>.github.io.git master
